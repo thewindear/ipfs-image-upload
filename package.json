@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "delopy": "node delopy.js"
+    "delopy": "vite build && node delopy.js"
   },
   "dependencies": {
     "vue": "^3.2.25",
