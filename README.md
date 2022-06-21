@@ -7,4 +7,6 @@
 > VITE_UPLOAD_API_TOKEN=上传文件使用的web3.storage对应的api token
 > 
 
+或者使用 https://tourl.cc/ipfs 在线版本
+
 可以使用 https://web3.storage 进行申请 api token 
