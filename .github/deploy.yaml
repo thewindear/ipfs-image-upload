@@ -1,0 +1,29 @@
+name: 自动生成静态文件部署至IPFS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-static-code:
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.1
+          cache: 'yarn'
+
+      - name: Install dependency
+        run: yarn install
+
+      - name: Builder
+        env:
+          VITE_UPLOAD_API_TOKEN: ${{ secrets.VITE_UPLOAD_API_TOKEN }}
+        run: yarn build
+
+      - name: Upload to IPFS
+        env:
+          DELOPY_API_TOKEN: ${{ secrets.DELOPY_API_TOKEN }}
+        run: node delopy.js
