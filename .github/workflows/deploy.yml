@@ -4,6 +4,7 @@ on:
     branches:
       - main
 jobs:
+  runs-on: ubuntu-latest
   build-static-code:
     steps:
       - name: Checkout code
