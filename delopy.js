@@ -9,7 +9,8 @@ async function deploy(path) {
     }
     const cid = await client.put(files)
     console.log(`部署成功: ${files.length} 个文件. cid: ${cid}`)
-    console.log(`前端地址:https://${cid}.ipfs.dweb.link`)
+    console.log(`前端地址 1:https://${cid}.ipfs.dweb.link`)
+    console.log(`前端地址 1:https://${cid}.ipfs.w3s.link`)
 }
 
 deploy('./dist/')

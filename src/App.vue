@@ -14,8 +14,33 @@
     </div>
     <div class="result" v-if="cid !== ''">
       <p class="success">上传成功</p>
-      <p><span>IPFS:</span> <a target="_blank" :href="ipfs">{{ ipfs }}</a> <span class="copy" @click="copyHandle(ipfs)">复制</span></p>
-      <p><span>链接:</span> <a target="_blank" :href="dwebLink">{{ dwebLink }}</a> <span class="copy" @click="copyHandle(dwebLink)">复制</span></p>
+      <div class="ipfs-gateway">
+        <div class="ipfs-gateway-item">
+          <p><span>w3s 网关</span>
+            <span class="copy" @click="copyHandle(w3sLink)">复制</span></p>
+          <p>
+            <a target="_blank" :href="w3sLink">{{ w3sLink }}</a>
+          </p>
+        </div>
+        <div class="ipfs-gateway-item">
+          <p>
+            <span>dweb 网关</span>
+            <span class="copy" @click="copyHandle(dwebLink)">复制</span>
+          </p>
+          <p>
+            <a target="_blank" :href="dwebLink">{{ dwebLink }}</a>
+          </p>
+        </div>
+      </div>
+      <div class="ipfs-gateway-item">
+        <p>
+          <span>IPFS:</span>
+          <span class="copy" @click="copyHandle(ipfs)">复制</span>
+        </p>
+        <p>
+          <a target="_blank" :href="ipfs">{{ ipfs }}</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +52,8 @@ import useClipboard from 'vue-clipboard3';
 const API_TOKEN = import.meta.env.VITE_UPLOAD_API_TOKEN;
 const MAX_SIZE = 104857600;
 const DWEB_LINK = 'https://{cid}.ipfs.dweb.link';
+const W3S_LINK = 'https://{cid}.ipfs.w3s.link';
+
 
 let uploadFile = ref(null);
 let imgSource = ref('');
@@ -74,6 +101,10 @@ const ipfs = computed(() => {
 
 const dwebLink = computed(() => {
   return DWEB_LINK.replace('{cid}', cid.value);
+})
+
+const w3sLink = computed(() => {
+  return W3S_LINK.replace('{cid}', cid.value);
 })
 
 //获取分配 的cid
@@ -148,6 +179,26 @@ const copyHandle = async (str) => {
 </script>
 
 <style scoped>
+.ipfs-gateway-item .copy {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+.ipfs-gateway-item a {
+  display: block;
+  padding: 5px;
+}
+.ipfs-gateway-item p:first-child {
+  margin-bottom: 10px;
+}
+.ipfs-gateway-item {
+  position: relative;
+  border-radius: 5px;
+  background: #f7f7f7;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.ipfs-gateway {margin: 15px 0;}
 body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
